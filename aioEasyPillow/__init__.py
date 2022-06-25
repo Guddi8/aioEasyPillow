@@ -21,7 +21,7 @@ from .canvas import Canvas
 from .editor import Editor
 from .font import Font
 from .text import Text
-from .utils import load_image_async, run_in_executor
+from .utils import load_image, run_in_executor
 
 
 class VersionInfo(NamedTuple):
