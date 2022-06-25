@@ -46,17 +46,17 @@ async def run_in_executor(func, **kwargs):
 
 
 async def load_image(link: str) -> Image.Image:
-    """Load image from link (async)
+    """Load image from link
 
     Parameters
     ----------
     link : str
-        Image from the provided link (if any)
+        Image url
 
     Returns
     -------
     PIL.Image.Image
-        Image link
+        Image from the provided link (if any)
     """
     async with aiohttp.ClientSession() as session:
         async with session.get(link) as response:
