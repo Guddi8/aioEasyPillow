@@ -45,25 +45,6 @@ async def run_in_executor(func, **kwargs):
     return data
 
 
-def load_image(link: str) -> Image.Image:
-    """Load image from link
-
-    Parameters
-    ----------
-    link : str
-        Image link
-
-    Returns
-    -------
-    PIL.Image.Image
-        Image from the provided link (if any)
-    """
-    _bytes = BytesIO(requests.get(link).content)
-    image = Image.open(_bytes).convert("RGBA")
-
-    return image
-
-
 async def load_image_async(link: str) -> Image.Image:
     """Load image from link (async)
 
