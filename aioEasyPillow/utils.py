@@ -28,7 +28,6 @@ import functools
 from io import BytesIO
 
 import aiohttp
-import requests
 from PIL import Image
 
 
