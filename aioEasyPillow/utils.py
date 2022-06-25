@@ -45,7 +45,7 @@ async def run_in_executor(func, **kwargs):
     return data
 
 
-async def load_image_async(link: str) -> Image.Image:
+async def load_image(link: str) -> Image.Image:
     """Load image from link (async)
 
     Parameters
