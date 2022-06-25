@@ -31,6 +31,15 @@ import aiohttp
 from PIL import Image
 
 
+def run_function_async(f):
+    @functools.wraps(f)
+    async def inner(*args, **kwargs):
+        f = functools.partial(func, *args, **kwargs)
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(None, f)
+    return inner
+
+
 async def run_in_executor(func, *args, **kwargs):
     """Run function in executor
 
