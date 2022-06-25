@@ -32,7 +32,7 @@ import requests
 from PIL import Image
 
 
-async def run_in_executor(func, **kwargs):
+async def run_in_executor(func, *args, **kwargs):
     """Run function in executor
 
     Parameters
@@ -40,7 +40,7 @@ async def run_in_executor(func, **kwargs):
     func : func
         Function to run
     """
-    func = functools.partial(func, **kwargs)
+    func = functools.partial(func, *args, **kwargs)
     data = await asyncio.get_event_loop().run_in_executor(None, func)
     return data
 
