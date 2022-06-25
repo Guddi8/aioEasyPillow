@@ -1,2 +1,5 @@
 # aioEasyPillow
- A experimental, async working, upgraded fork of easy_pil.
+
+---------------
+
+An experimental, async working, upgraded version of easy_pil.
