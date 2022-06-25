@@ -32,12 +32,16 @@ from PIL import Image
 
 
 def run_function_async(f):
+    """Decorator to run a sync function async
+
+    This is not ment to be used by you, it is for this lib itself
+    """
     @functools.wraps(f)
-    async def inner(*args, **kwargs):
+    async def decorator(*args, **kwargs):
         f = functools.partial(func, *args, **kwargs)
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(None, f)
-    return inner
+    return decorator
 
 
 async def run_in_executor(func, *args, **kwargs):
