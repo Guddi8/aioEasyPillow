@@ -72,7 +72,10 @@ class Editor:
         return _bytes
 
 
-    def resize(self, size: Tuple[float, float], crop=False) -> Editor:
+    async def resize(self, size: Tuple[float, float], crop: bool = False) -> Editor:
+        return await run_in_executor(self.__resize, size, crop=crop)
+
+    def __resize(self, size: Tuple[float, float], crop=False) -> Editor:
         """Resize image
 
         Parameters
@@ -108,7 +111,10 @@ class Editor:
         return self
 
 
-    def rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
+    async def rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
+        return await run_in_executor(self.__rounded_corners, radius, offset)
+
+    def __rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
         """Make image rounded corners
 
         Parameters
@@ -133,7 +139,10 @@ class Editor:
         return self
 
 
-    def circle_image(self) -> Editor:
+    async def circle_image(self) -> Editor:
+        return await run_in_executor(self.circle_image)
+
+    def __circle_image(self) -> Editor:
         """Make image circle"""
         background = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
         holder = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
@@ -146,7 +155,10 @@ class Editor:
         return self
 
 
-    def rotate(self, deg: float = 0, expand: bool = False) -> Editor:
+    async def rotate(self, deg: float = 0, expand: bool = False) -> Editor:
+        return await run_in_executor(self.__rotate, deg, expand)
+
+    def __rotate(self, deg: float = 0, expand: bool = False) -> Editor:
         """Rotate image
 
         Parameters
@@ -160,9 +172,10 @@ class Editor:
         return self
 
 
-    def blur(
-        self, mode: Literal["box", "gussian"] = "gussian", amount: float = 1
-    ) -> Editor:
+    async def blur(self, mode: Literal["box", "gussian"] = "gussian", amount: float = 1) -> Editor:
+        return await run_in_executor(self.__blur, mode, amount)
+
+    def __blur(self, mode: Literal["box", "gussian"] = "gussian", amount: float = 1) -> Editor:
         """Blur image
 
         Parameters
@@ -180,11 +193,13 @@ class Editor:
         return self
 
 
-    def blend(
-        self,
-        image: Union[Image.Image, Editor, Canvas],
-        alpha: float = 0.0,
-        on_top: bool = False,
+    async def blend(
+            self, image: Union[Image.Image, Editor, Canvas], alpha: float = 0.0, on_top: bool = False
+    ) -> Editor:
+        return await run_in_executor(self.__blend, image, alpha, on_top)
+
+    def __blend(
+            self, image: Union[Image.Image, Editor, Canvas], alpha: float = 0.0, on_top: bool = False
     ) -> Editor:
         """Blend image into editor image
 
@@ -211,7 +226,12 @@ class Editor:
         return self
 
 
-    def paste(
+    async def paste(
+        self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
+    ) -> Editor:
+        return await run_in_executor(self.__paste, image, position)
+
+    def __paste(
         self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
     ) -> Editor:
         """Paste image into editor
@@ -234,7 +254,17 @@ class Editor:
         return self
 
 
-    def text(
+    async def text(
+        self,
+        position: Tuple[float, float],
+        text: str,
+        font: Union[ImageFont.FreeTypeFont, Font] = None,
+        color: Union[Tuple[int, int, int], str, int] = "black",
+        align: Literal["left", "center", "right"] = "left",
+    ) -> Editor:
+        return await run_in_executor(self.__text, position, text, font, color, align)
+
+    def __text(
         self,
         position: Tuple[float, float],
         text: str,
@@ -268,7 +298,16 @@ class Editor:
         return self
 
 
-    def multicolor_text(
+    async def multicolor_text(
+        self,
+        position: Tuple[float, float],
+        texts: List[Text],
+        space_separated: bool = True,
+        align: Literal["left", "center", "right"] = "left",
+    ) -> Editor:
+        return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align)
+
+    def __multicolor_text(
         self,
         position: Tuple[float, float],
         texts: List[Text],
@@ -328,7 +367,20 @@ class Editor:
         return self
 
 
-    def rectangle(
+    async def rectangle(
+        self,
+        position: Tuple[float, float],
+        width: float,
+        height: float,
+        fill: Union[str, int, Tuple[int, int, int]] = None,
+        color: Union[str, int, Tuple[int, int, int]] = None,
+        outline: Union[str, int, Tuple[int, int, int]] = None,
+        stroke_width: float = 1,
+        radius: int = 0,
+    ) -> Editor:
+        return await run_in_executor(self.__rectangle, position, width, height, fill, color, outline, stroke_width, radius)
+
+    def __rectangle(
         self,
         position: Tuple[float, float],
         width: float,
@@ -387,7 +439,21 @@ class Editor:
         return self
 
 
-    def bar(
+    async def bar(
+        self,
+        position: Tuple[float, float],
+        max_width: Union[int, float],
+        height: Union[int, float],
+        percentage: int = 1,
+        fill: Union[str, int, Tuple[int, int, int]] = None,
+        color: Union[str, int, Tuple[int, int, int]] = None,
+        outline: Union[str, int, Tuple[int, int, int]] = None,
+        stroke_width: float = 1,
+        radius: int = 0,
+    ) -> Editor:
+        return await run_in_executor(self.__bar, position, max_width, height, percentage, fill, color, outline, stroke_width, radius)
+
+    def __bar(
         self,
         position: Tuple[float, float],
         max_width: Union[int, float],
@@ -451,7 +517,19 @@ class Editor:
         return self
 
 
-    def rounded_bar(
+    async def rounded_bar(
+        self,
+        position: Tuple[float, float],
+        width: Union[int, float],
+        height: Union[int, float],
+        percentage: float,
+        fill: Union[str, int, Tuple[int, int, int]] = None,
+        color: Union[str, int, Tuple[int, int, int]] = None,
+        stroke_width: float = 1,
+    ) -> Editor:
+        return await run_in_executor(self.__rounded_bar, position, width, height, percentage, fill, color, stroke_width)
+
+    def __rounded_bar(
         self,
         position: Tuple[float, float],
         width: Union[int, float],
@@ -499,7 +577,19 @@ class Editor:
         return self
 
 
-    def ellipse(
+    async def ellipse(
+        self,
+        position: Tuple[float, float],
+        width: float,
+        height: float,
+        fill: Union[str, int, Tuple[int, int, int]] = None,
+        color: Union[str, int, Tuple[int, int, int]] = None,
+        outline: Union[str, int, Tuple[int, int, int]] = None,
+        stroke_width: float = 1,
+    ) -> Editor:
+        return await run_in_executor(self.__ellipse, position, width, height, fill, color, outline, stroke_width)
+
+    def __ellipse(
         self,
         position: Tuple[float, float],
         width: float,
@@ -545,7 +635,16 @@ class Editor:
         return self
 
 
-    def polygon(
+    async def polygon(
+        self,
+        cordinates: list,
+        fill: Union[str, int, Tuple[int, int, int]] = None,
+        color: Union[str, int, Tuple[int, int, int]] = None,
+        outline: Union[str, int, Tuple[int, int, int]] = None,
+    ) -> Editor:
+        return await run_in_executor(self.__polygon, cordinates, fill, color, outline)
+
+    def __polygon(
         self,
         cordinates: list,
         fill: Union[str, int, Tuple[int, int, int]] = None,
@@ -574,7 +673,20 @@ class Editor:
         return self
 
 
-    def arc(
+    async def arc(
+        self,
+        position: Tuple[float, float],
+        width: float,
+        height: float,
+        start: float,
+        rotation: float,
+        fill: Union[str, int, Tuple[int, int, int]] = None,
+        color: Union[str, int, Tuple[int, int, int]] = None,
+        stroke_width: float = 1,
+    ) -> Editor:
+        return await run_in_executor(self.__arc, position, width, height, start, rotation, fill, color, stroke_width)
+
+    def __arc(
         self,
         position: Tuple[float, float],
         width: float,
@@ -625,12 +737,18 @@ class Editor:
         return self
 
 
-    def show(self):
+    async def show(self):
+        return await run_in_executor(self.__show)
+
+    def __show(self):
         """Show the image."""
         self.image.show()
 
 
-    def save(self, fp, format: str = None, **params):
+    async def save(self, fp, format: str = None, **params):
+        return await run_in_executor(self.__save, fp, format, **params)
+
+    def __save(self, fp, format: str = None, **params):
         """Save the image
 
         Parameters
