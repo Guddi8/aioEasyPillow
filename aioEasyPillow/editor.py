@@ -34,7 +34,7 @@ from typing_extensions import Literal
 from .canvas import Canvas
 from .font import Font
 from .text import Text
-from .utils import run_function_async
+from .utils import run_in_executor
 
 
 class Editor:
@@ -72,7 +72,6 @@ class Editor:
         return _bytes
 
 
-    @run_function_async
     def resize(self, size: Tuple[float, float], crop=False) -> Editor:
         """Resize image
 
@@ -109,7 +108,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
         """Make image rounded corners
 
@@ -135,7 +133,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def circle_image(self) -> Editor:
         """Make image circle"""
         background = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
@@ -149,7 +146,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def rotate(self, deg: float = 0, expand: bool = False) -> Editor:
         """Rotate image
 
@@ -164,7 +160,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def blur(
         self, mode: Literal["box", "gussian"] = "gussian", amount: float = 1
     ) -> Editor:
@@ -185,7 +180,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def blend(
         self,
         image: Union[Image.Image, Editor, Canvas],
@@ -217,7 +211,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def paste(
         self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
     ) -> Editor:
@@ -241,7 +234,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def text(
         self,
         position: Tuple[float, float],
@@ -276,7 +268,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def multicolor_text(
         self,
         position: Tuple[float, float],
@@ -337,7 +328,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def rectangle(
         self,
         position: Tuple[float, float],
@@ -397,7 +387,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def bar(
         self,
         position: Tuple[float, float],
@@ -462,7 +451,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def rounded_bar(
         self,
         position: Tuple[float, float],
@@ -511,7 +499,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def ellipse(
         self,
         position: Tuple[float, float],
@@ -558,7 +545,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def polygon(
         self,
         cordinates: list,
@@ -588,7 +574,6 @@ class Editor:
         return self
 
 
-    @run_function_async
     def arc(
         self,
         position: Tuple[float, float],
@@ -640,13 +625,11 @@ class Editor:
         return self
 
 
-    @run_function_async
     def show(self):
         """Show the image."""
         self.image.show()
 
 
-    @run_function_async
     def save(self, fp, format: str = None, **params):
         """Save the image
 

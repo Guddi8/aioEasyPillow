@@ -31,19 +31,6 @@ import aiohttp
 from PIL import Image
 
 
-def run_function_async(func):
-    """Decorator to run a sync function async
-
-    This is not ment to be used by you, it is for this lib itself
-    """
-    @functools.wraps(func)
-    async def decorator(*args, **kwargs):
-        f = functools.partial(func, *args, **kwargs)
-        loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, f)
-    return decorator
-
-
 async def run_in_executor(func, *args, **kwargs):
     """Run function in executor
 
