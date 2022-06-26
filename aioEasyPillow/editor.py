@@ -48,11 +48,12 @@ class Editor:
 
     def __init__(self, image: Union[Image.Image, str, BytesIO, Editor, Canvas]) -> None:
         if isinstance(image, str) or isinstance(image, BytesIO):
-            self.image = Image.open(image)
+            self.image: Image.Image = Image.open(image)
         elif isinstance(image, Canvas) or isinstance(image, Editor):
-            self.image = image.image
+            self.image: Image.Image = image.image
         else:
-            self.image = image
+            self.image: Image.Image = image
+        self.image: Image.Image = self.image.convert("RGBA")
 
 
     @property

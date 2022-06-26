@@ -64,4 +64,4 @@ class Canvas:
         self.size = size
         self.color = color
 
-        self.image = Image.new("RGBA", size, color=color)
+        self.image: Image.Image = Image.new("RGBA", size, color=color)
