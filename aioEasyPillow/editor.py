@@ -172,22 +172,22 @@ class Editor:
         return self
 
 
-    async def blur(self, mode: Literal["box", "gussian"] = "gussian", amount: float = 1) -> Editor:
+    async def blur(self, mode: Literal["box", "gaussian"] = "gaussian", amount: float = 1) -> Editor:
         return await run_in_executor(self.__blur, mode, amount)
 
-    def __blur(self, mode: Literal["box", "gussian"] = "gussian", amount: float = 1) -> Editor:
+    def __blur(self, mode: Literal["box", "gaussian"] = "gaussian", amount: float = 1) -> Editor:
         """Blur image
 
         Parameters
         ----------
-        mode : Literal["box", "gussian"], optional
-            Blur mode, by default "gussian"
+        mode : Literal["box", "gaussian"], optional
+            Blur mode, by default "gaussian"
         amount : float, optional
             Amount of blur, by default 1
         """
         if mode == "box":
             self.image = self.image.filter(ImageFilter.BoxBlur(radius=amount))
-        if mode == "gussian":
+        if mode == "gaussian":
             self.image = self.image.filter(ImageFilter.GaussianBlur(radius=amount))
 
         return self
@@ -637,16 +637,16 @@ class Editor:
 
     async def polygon(
         self,
-        cordinates: list,
+        coordinates: list,
         fill: Union[str, int, Tuple[int, int, int]] = None,
         color: Union[str, int, Tuple[int, int, int]] = None,
         outline: Union[str, int, Tuple[int, int, int]] = None,
     ) -> Editor:
-        return await run_in_executor(self.__polygon, cordinates, fill, color, outline)
+        return await run_in_executor(self.__polygon, coordinates, fill, color, outline)
 
     def __polygon(
         self,
-        cordinates: list,
+        coordinates: list,
         fill: Union[str, int, Tuple[int, int, int]] = None,
         color: Union[str, int, Tuple[int, int, int]] = None,
         outline: Union[str, int, Tuple[int, int, int]] = None,
@@ -655,8 +655,8 @@ class Editor:
 
         Parameters
         ----------
-        cordinates : list
-            Cordinates to draw
+        coordinates : list
+            Coordinates to draw
         fill : Union[str, int, Tuple[int, int, int]], optional
             Fill color, by default None
         color : Union[str, int, Tuple[int, int, int]], optional
@@ -668,7 +668,7 @@ class Editor:
             fill = color
 
         draw = ImageDraw.Draw(self.image)
-        draw.polygon(cordinates, fill=fill, outline=outline)
+        draw.polygon(coordinates, fill=fill, outline=outline)
 
         return self
 
