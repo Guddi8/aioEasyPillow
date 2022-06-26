@@ -164,7 +164,7 @@ class Editor:
         Parameters
         ----------
         deg : float, optional
-            Degress to rotate, by default 0
+            Degrees to rotate, by default 0
         expand : bool, optional
             Expand while rotating, by default False
         """
@@ -396,7 +396,7 @@ class Editor:
         Parameters
         ----------
         position : Tuple[float, float]
-            Position to draw recangle
+            Position to draw rectangle
         width : float
             Width of rectangle
         height : float
@@ -476,7 +476,7 @@ class Editor:
         height : Union[int, float]
             Height of the bar
         percentage : int, optional
-            Percebtage to fill of the bar, by default 1
+            Percentage to fill of the bar, by default 1
         fill : Union[str, int, Tuple[int, int, int]], optional
             Fill color, by default None
         color : Union[str, int, Tuple[int, int, int]], optional
@@ -710,7 +710,7 @@ class Editor:
         start : float
             Start position of arch
         rotation : float
-            Rotation in degre
+            Rotation in degree
         fill : Union[str, int, Tuple[int, int, int]], optional
             Fill color, by default None
         color : Union[str, int, Tuple[int, int, int]], optional
