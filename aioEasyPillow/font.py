@@ -67,10 +67,12 @@ class Font:
     def __init__(self, path: str, size: int = 10, **kwargs) -> None:
         self.font = ImageFont.truetype(path, size=size, **kwargs)
 
-    @staticmethod
+    @classmethod
     def poppins(
+        cls,
         variant: Literal["regular", "bold", "italic", "light"] = "regular",
         size: int = 10,
+        **kwargs
     ):
         """Poppins font
 
@@ -81,12 +83,14 @@ class Font:
         size : int, optional
             Font size, by default 10
         """
-        return ImageFont.truetype(fonts_path["poppins"][variant], size=size)
+        return cls(fonts_path["poppins"][variant], size, **kwargs)
 
-    @staticmethod
+    @classmethod
     def caveat(
+        cls,
         variant: Literal["regular", "bold", "italic", "light"] = "regular",
         size: int = 10,
+        **kwargs
     ):
         """Caveat font
 
@@ -97,12 +101,14 @@ class Font:
         size : int, optional
             Font size, by default 10
         """
-        return ImageFont.truetype(fonts_path["caveat"][variant], size=size)
+        return cls(fonts_path["caveat"][variant], size, **kwargs)
 
-    @staticmethod
+    @classmethod
     def montserrat(
+        cls,
         variant: Literal["regular", "bold", "italic", "light"] = "regular",
         size: int = 10,
+        **kwargs
     ):
         """Montserrat font
 
@@ -113,4 +119,4 @@ class Font:
         size : int, optional
             Font size, by default 10
         """
-        return ImageFont.truetype(fonts_path["montserrat"][variant], size=size)
+        return cls(fonts_path["montserrat"][variant], size, **kwargs)
