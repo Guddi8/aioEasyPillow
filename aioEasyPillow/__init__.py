@@ -13,7 +13,7 @@ __title__ = 'aioEasyPillow'
 __author__ = 'Guddi'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2021-2022 shahriyardx & 2022-present Guddi'
-__version__ = '0.0.1a1'
+__version__ = '0.1.0'
 
 from typing import NamedTuple, Literal
 
@@ -32,6 +32,6 @@ class VersionInfo(NamedTuple):
     serial: int
 
 
-version_info: VersionInfo = VersionInfo(major=0, minor=0, micro=1, release='alpha', serial=1)
+version_info: VersionInfo = VersionInfo(major=0, minor=1, micro=0, release='final', serial=0)
 
 del NamedTuple, Literal, VersionInfo
