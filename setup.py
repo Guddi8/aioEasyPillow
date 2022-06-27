@@ -32,4 +32,7 @@ setup(
     install_requires=requirements,
     python_requires=">=3.8, <4",
     include_package_data=True,
+    package_data={
+        "aioEasyPillow": ["fonts/*/*.ttf"],
+    },
 )
