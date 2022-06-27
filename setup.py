@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import re
 
 
@@ -23,7 +23,7 @@ setup(
     long_description_content_type="text/markdown",
     author='Guddi',
     url='https://github.com/Guddi8/aioEasyPillow',
-    packages=['aioEasyPill'],
+    packages=find_packages(),
     license='MIT',
     keywords=[
         'PIL', 'Pillow', 'async PIL', 'async Pillow', 'Easy PIL', 'Easy Pillow',
