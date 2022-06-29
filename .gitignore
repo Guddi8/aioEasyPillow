@@ -146,3 +146,6 @@ cython_debug/
 
 # PyCharm / IDEs
 .idea/
+
+# others
+tests/
