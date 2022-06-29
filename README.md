@@ -6,10 +6,9 @@
 [Pillow]: https://github.com/python-pillow/Pillow
 [easy-pil]: https://github.com/shahriyardx/easy-pil
 
-
 A python library based on [easy-pil] and [Pillow] to easily edit/modify images.
 
----
+
 ## Installation
 
 **Python 3.8 or above is required**\
@@ -23,14 +22,12 @@ py -3 -m pip install -U discord.py[voice]
 ```
 
 
----
 ## Quick Example
 
 ```python
 import asyncio
 
 from aioEasyPillow import Editor, Canvas, Font
-
 
 async def main():
     blank = Canvas((200, 100), 'black')
@@ -40,7 +37,6 @@ async def main():
     await editor.text((20,20), 'Quick Example', font)
     await editor.save('example.png', 'PNG')
     await editor.show()
-
 
 asyncio.run(main())
 ```
