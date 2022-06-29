@@ -140,7 +140,7 @@ class Editor:
 
 
     async def circle_image(self) -> Editor:
-        return await run_in_executor(self.circle_image)
+        return await run_in_executor(self.__circle_image)
 
     def __circle_image(self) -> Editor:
         """Make image circle"""
