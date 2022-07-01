@@ -23,7 +23,7 @@ Welcome to aioEasyPillow's documentation!
 Quickstart
 ==========
 
-.. code-block:: python3
+.. code:: python3
    import asyncio
 
    from aioEasyPillow import Editor, Canvas, Font
