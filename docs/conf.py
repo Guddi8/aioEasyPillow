@@ -50,6 +50,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 html_theme = 'furo'
 
+html_title = project
+
 html_theme_options = {
     'prefers-color-scheme': 'dark'
 }
