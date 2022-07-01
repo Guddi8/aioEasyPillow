@@ -23,8 +23,7 @@ Welcome to aioEasyPillow's documentation!
 Quickstart
 ==========
 
-::
-   :highlight_language: python
+.. code:: python
    :caption: A quick example how to create a image an add some text
    import asyncio
 
