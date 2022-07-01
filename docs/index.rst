@@ -11,19 +11,19 @@ Welcome to aioEasyPillow's documentation!
    :caption: Contents:
 
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+..
+   Indices and tables
+   ==================
+..
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`
 
 
 Quickstart
 ==========
 
-.. code-block:: python
+.. code-block:: python3
    import asyncio
 
    from aioEasyPillow import Editor, Canvas, Font
