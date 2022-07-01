@@ -23,7 +23,7 @@ Indices and tables
 Quickstart
 ==========
 
-.. code-block::python
+.. code-block:: python
    import asyncio
 
    from aioEasyPillow import Editor, Canvas, Font
@@ -38,3 +38,6 @@ Quickstart
        await editor.show()
 
    asyncio.run(main())
+
+
+Komisch Komisch
