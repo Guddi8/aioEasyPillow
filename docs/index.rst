@@ -24,7 +24,7 @@ Quickstart
 ==========
 A quick example how to create a image an add some text:
 
-.. code-block:: python
+.. code-block:: python3
    import asyncio
 
    from aioEasyPillow import Editor, Canvas, Font
