@@ -22,9 +22,10 @@ Welcome to aioEasyPillow's documentation!
 
 Quickstart
 ==========
-A quick example how to create a image an add some text:
 
-.. code-block:: python3
+.. code-block::
+   :highlight_language: python
+   :caption: A quick example how to create a image an add some text
    import asyncio
 
    from aioEasyPillow import Editor, Canvas, Font
