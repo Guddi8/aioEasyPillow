@@ -10,6 +10,7 @@ Welcome to aioEasyPillow's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   pages/intro
 
 ..
    Indices and tables
@@ -25,6 +26,7 @@ Quickstart
 
 .. code-block:: python
    :caption: A quick example how to create a image an add some text
+
    import asyncio
 
    from aioEasyPillow import Editor, Canvas, Font
@@ -42,3 +44,4 @@ Quickstart
 
 
 Komisch Komisch
+
