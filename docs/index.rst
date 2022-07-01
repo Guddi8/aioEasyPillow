@@ -23,7 +23,7 @@ Welcome to aioEasyPillow's documentation!
 Quickstart
 ==========
 
-.. code:: python
+.. code-block:: python
    :caption: A quick example how to create a image an add some text
    import asyncio
 
