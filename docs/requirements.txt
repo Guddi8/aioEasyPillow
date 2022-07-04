@@ -1,2 +1,4 @@
 furo
-typing-extensions~=4.3.0
+Pillow>=9.1,<9.2
+aiohttp>=3.8,<4
+typing-extensions
