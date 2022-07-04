@@ -33,12 +33,12 @@ class Text:
 
     Parameters
     ----------
-    text : str
-        Text
-    font : ImageFont.FreeTypeFont
-        Font for text
-    color : Union[Tuple[int, int, int], str, int], optional
-        Font color, by default "black"
+    text: :class:`str`
+        Text to write
+    font: :class:`ImageFont.FreeTypeFont`
+        Font for the text
+    color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+        Font color, by default ``"black"``
     """
 
     def __init__(

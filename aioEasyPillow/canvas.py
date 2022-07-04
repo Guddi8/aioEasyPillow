@@ -33,14 +33,14 @@ class Canvas:
 
     Parameters
     ----------
-    size : Tuple[float, float], optional
-        Size of image, by default None
-    width : float, optional
-        Width of image, by default None
-    height : float, optional
+    size: Tuple[:class:`float`, :class:`float`], optional
+        Size of image, by default ``None``
+    width: :class:`float`, optional
+        Width of image, by default ``None``
+    height: :class:`float`, optional
         Height of image, by default None
-    color : Union[Tuple[int, int, int], str, int], optional
-        Color of image, by default None
+    color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+        Color of image, by default ``None``
 
     Raises
     ------
@@ -56,7 +56,7 @@ class Canvas:
         color: Union[Tuple[int, int, int], str, int] = None,
     ) -> None:
         if not size and not width and not height:
-            raise ValueError("size, width, and height cannot all be None")
+            raise ValueError('size, width, and height cannot all be None')
 
         if width and height:
             size = (width, height)
@@ -64,4 +64,4 @@ class Canvas:
         self.size = size
         self.color = color
 
-        self.image: Image.Image = Image.new("RGBA", size, color=color)
+        self.image: Image.Image = Image.new('RGBA', size, color=color)
