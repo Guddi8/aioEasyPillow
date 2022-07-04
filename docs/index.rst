@@ -15,14 +15,6 @@ Welcome to aioEasyPillow's documentation!
    discord
    api
 
-..
-   Indices and tables
-   ==================
-..
-   * :ref:`genindex`
-   * :ref:`modindex`
-   * :ref:`search`
-
 
 Quickstart
 ==========
@@ -45,5 +37,3 @@ Quickstart
 
    asyncio.run(main())
 
-
-Scheint ja doch zu gehen
