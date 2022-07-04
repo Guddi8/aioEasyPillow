@@ -1,6 +1,6 @@
 Canvas
 ======
 
-.. autoclass:: aioEasyPillow.canvas.Canvas
+.. autoclass:: aioEasyPillow.Canvas
     :members:
     :undoc-members:
