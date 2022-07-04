@@ -6,7 +6,11 @@ sphinx:
   builder: html
 
 
+build:
+  tools:
+    python: "3.8"
+
+
 python:
-  version: "3.8"
   install:
   - requirements: docs/requirements.txt
