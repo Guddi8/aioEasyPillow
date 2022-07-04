@@ -11,9 +11,9 @@ Welcome to aioEasyPillow's documentation!
    :caption: Table of Contents
    :hidden:
 
-   intro.rst
-   discord.rst
-   api.rst
+   intro
+   discord
+   api
 
 ..
    Indices and tables
