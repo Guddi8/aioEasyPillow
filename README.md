@@ -1,7 +1,8 @@
 # aioEasyPillow
 
 
-![PyPI](https://img.shields.io/pypi/v/aioEasyPillow?style=flat-square)
+[![PyPI](https://img.shields.io/pypi/v/aioEasyPillow?style=flat-square)](https://pypi.org/project/aioEasyPillow/)
+[![Documentation Status](https://readthedocs.org/projects/aioeasypillow/badge/?version=latest&style=flat-square)](https://aioeasypillow.readthedocs.io/en/latest/)
 
 [Pillow]: https://github.com/python-pillow/Pillow
 [easy-pil]: https://github.com/shahriyardx/easy-pil
