@@ -1,6 +1,8 @@
+.. currentmodule:: aioEasyPillow
+
 Canvas
 ======
 
-.. autoclass:: aioEasyPillow.Canvas
+.. autoclass:: Canvas
     :members:
     :undoc-members:
