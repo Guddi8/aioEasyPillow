@@ -42,7 +42,7 @@ class Editor:
 
     Parameters
     ----------
-    image : Union[Image.Image, str, Editor, Canvas]
+    image: Union[:class:`Image.Image`, :class:`str`, :class:`Editor`, :class:`Canvas`]
         Image or Canvas to edit.
     """
 
@@ -62,7 +62,7 @@ class Editor:
 
         Returns
         -------
-        BytesIO
+        :class:`BytesIO`
             Bytes from the image of Editor
         """
         _bytes = BytesIO()
@@ -73,18 +73,18 @@ class Editor:
 
 
     async def resize(self, size: Tuple[float, float], crop: bool = False) -> Editor:
-        return await run_in_executor(self.__resize, size, crop=crop)
-
-    def __resize(self, size: Tuple[float, float], crop=False) -> Editor:
         """Resize image
 
         Parameters
         ----------
-        size : Tuple[float, float]
+        size: Tuple[:class:`float`, :class:`float`]
             New Size of image
-        crop : bool, optional
-            Crop the image to bypass distortion, by default False
+        crop: :class:`bool`, optional
+            Crop the image to bypass distortion, by default ``False``
         """
+        return await run_in_executor(self.__resize, size, crop=crop)
+
+    def __resize(self, size: Tuple[float, float], crop=False) -> Editor:
         if not crop:
             self.image = self.image.resize(size, Image.ANTIALIAS)
 
@@ -112,18 +112,18 @@ class Editor:
 
 
     async def rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
-        return await run_in_executor(self.__rounded_corners, radius, offset)
-
-    def __rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
         """Make image rounded corners
 
         Parameters
         ----------
-        radius : int, optional
-            Radius of roundness, by default 10
-        offset : int, optional
-            Offset pixel while making rounded, by default 2
+        radius: :class:`int`, optional
+            Radius of roundness, by default ``10``
+        offset: :class:`int`, optional
+            Offset pixel while making rounded, by default ``2``
         """
+        return await run_in_executor(self.__rounded_corners, radius, offset)
+
+    def __rounded_corners(self, radius: int = 10, offset: int = 2) -> Editor:
         background = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
         holder = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
         mask = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
@@ -140,10 +140,10 @@ class Editor:
 
 
     async def circle_image(self) -> Editor:
+        """Make image circle"""
         return await run_in_executor(self.__circle_image)
 
     def __circle_image(self) -> Editor:
-        """Make image circle"""
         background = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
         holder = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
         mask = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
@@ -156,38 +156,38 @@ class Editor:
 
 
     async def rotate(self, deg: float = 0, expand: bool = False) -> Editor:
-        return await run_in_executor(self.__rotate, deg, expand)
-
-    def __rotate(self, deg: float = 0, expand: bool = False) -> Editor:
         """Rotate image
 
         Parameters
         ----------
-        deg : float, optional
-            Degrees to rotate, by default 0
-        expand : bool, optional
-            Expand while rotating, by default False
+        deg: :class:`float`, optional
+            Degrees to rotate, by default ``0``
+        expand: :class:`bool`, optional
+            Expand while rotating, by default ``False``
         """
+        return await run_in_executor(self.__rotate, deg, expand)
+
+    def __rotate(self, deg: float = 0, expand: bool = False) -> Editor:
         self.image = self.image.rotate(angle=deg, expand=expand)
         return self
 
 
-    async def blur(self, mode: Literal["box", "gaussian"] = "gaussian", amount: float = 1) -> Editor:
-        return await run_in_executor(self.__blur, mode, amount)
-
-    def __blur(self, mode: Literal["box", "gaussian"] = "gaussian", amount: float = 1) -> Editor:
+    async def blur(self, mode: Literal['box', 'gaussian'] = 'gaussian', amount: float = 1) -> Editor:
         """Blur image
 
         Parameters
         ----------
-        mode : Literal["box", "gaussian"], optional
-            Blur mode, by default "gaussian"
-        amount : float, optional
-            Amount of blur, by default 1
+        mode: Literal['box', 'gaussian'], optional
+            Blur mode, by default ``gaussian``
+        amount: :class:`float`, optional
+            Amount of blur, by default ``1``
         """
-        if mode == "box":
+        return await run_in_executor(self.__blur, mode, amount)
+
+    def __blur(self, mode: Literal['box', 'gaussian'] = 'gaussian', amount: float = 1) -> Editor:
+        if mode == 'box':
             self.image = self.image.filter(ImageFilter.BoxBlur(radius=amount))
-        if mode == "gaussian":
+        if mode == 'gaussian':
             self.image = self.image.filter(ImageFilter.GaussianBlur(radius=amount))
 
         return self
@@ -196,22 +196,22 @@ class Editor:
     async def blend(
             self, image: Union[Image.Image, Editor, Canvas], alpha: float = 0.0, on_top: bool = False
     ) -> Editor:
+        """Blend image into editor image
+
+        Parameters
+        ----------
+        image: Union[:class:`Image.Image`, :class:`Editor`, :class:`Canvas`]
+            Image to blend
+        alpha: :class:`float`, optional
+            Alpha amount, by default ``0.0``
+        on_top: :class:`bool`, optional
+            Places image on top, by default ``False``
+        """
         return await run_in_executor(self.__blend, image, alpha, on_top)
 
     def __blend(
             self, image: Union[Image.Image, Editor, Canvas], alpha: float = 0.0, on_top: bool = False
     ) -> Editor:
-        """Blend image into editor image
-
-        Parameters
-        ----------
-        image : Union[Image.Image, Editor, Canvas]
-            Image to blend
-        alpha : float, optional
-            Alpha amount, by default 0.0
-        on_top : bool, optional
-            Places image on top, by default False
-        """
         if isinstance(image, Editor) or isinstance(image, Canvas):
             image = image.image
 
@@ -229,21 +229,21 @@ class Editor:
     async def paste(
         self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
     ) -> Editor:
+        """Paste image into editor
+
+        Parameters
+        ----------
+        image: Union[:class:`Image.Image`, :class:`Editor`, :class:`Canvas`]
+            Image to paste
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to paste
+        """
         return await run_in_executor(self.__paste, image, position)
 
     def __paste(
         self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
     ) -> Editor:
-        """Paste image into editor
-
-        Parameters
-        ----------
-        image : Union[Image.Image, Editor, Canvas]
-            Image to paste
-        position : Tuple[float, float]
-            Position to paste
-        """
-        blank = Image.new("RGBA", size=self.image.size, color=(255, 255, 255, 0))
+        blank = Image.new('RGBA', size=self.image.size, color=(255, 255, 255, 0))
 
         if isinstance(image, Editor) or isinstance(image, Canvas):
             image = image.image
@@ -259,9 +259,24 @@ class Editor:
         position: Tuple[float, float],
         text: str,
         font: Union[ImageFont.FreeTypeFont, Font] = None,
-        color: Union[Tuple[int, int, int], str, int] = "black",
-        align: Literal["left", "center", "right"] = "left",
+        color: Union[Tuple[int, int, int], str, int] = 'black',
+        align: Literal["left", "center", "right"] = 'left',
     ) -> Editor:
+        """Draw text into image
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw text
+        text: str
+            Text to draw
+        font: Union[:class:`ImageFont.FreeTypeFont`, :class:`Font`], optional
+            Font used for text, by default ``None``
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Color of the font, by default ``'black'``
+        align: Literal['left', 'center', 'right'], optional
+            Align text, by default ``'left'``
+        """
         return await run_in_executor(self.__text, position, text, font, color, align)
 
     def __text(
@@ -269,28 +284,13 @@ class Editor:
         position: Tuple[float, float],
         text: str,
         font: Union[ImageFont.FreeTypeFont, Font] = None,
-        color: Union[Tuple[int, int, int], str, int] = "black",
-        align: Literal["left", "center", "right"] = "left",
+        color: Union[Tuple[int, int, int], str, int] = 'black',
+        align: Literal["left", "center", "right"] = 'left',
     ) -> Editor:
-        """Draw text into image
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw text
-        text : str
-            Text to draw
-        font : Union[ImageFont.FreeTypeFont, Font], optional
-            Font used for text, by default None
-        color : Union[Tuple[int, int, int], str, int], optional
-            Color of the font, by default "black"
-        align : Literal["left", "center", "right"], optional
-            Align text, by default "left"
-        """
         if isinstance(font, Font):
             font = font.font
 
-        anchors = {"left": "lt", "center": "mt", "right": "rt"}
+        anchors = {'left': 'lt', 'center': 'mt', 'right': 'rt'}
 
         draw = ImageDraw.Draw(self.image)
         draw.text(position, text, color, font=font, anchor=anchors[align])
@@ -305,6 +305,19 @@ class Editor:
         space_separated: bool = True,
         align: Literal["left", "center", "right"] = "left",
     ) -> Editor:
+        """Draw multicolor text
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw text
+        texts: List[:class:`Text`]
+            List of texts
+        space_separated: :class:`bool`, optional
+            Separate texts with space, by default ``True``
+        align: Literal['left', 'center', 'right'], optional
+            Align texts, by default ``'left'``
+        """
         return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align)
 
     def __multicolor_text(
@@ -312,27 +325,14 @@ class Editor:
         position: Tuple[float, float],
         texts: List[Text],
         space_separated: bool = True,
-        align: Literal["left", "center", "right"] = "left",
+        align: Literal["left", "center", "right"] = 'left',
     ) -> Editor:
-        """Draw multicolor text
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw text
-        texts : List[Text]
-            List of texts
-        space_separated : bool, optional
-            Separate texts with space, by default True
-        align : Literal["left", "center", "right"], optional
-            Align texts, by default "left"
-        """
         draw = ImageDraw.Draw(self.image)
 
-        if align == "left":
+        if align == 'left':
             position = position
 
-        if align == "right":
+        if align == 'right':
             total_width = 0
 
             for text in texts:
@@ -340,7 +340,7 @@ class Editor:
 
             position = (position[0] - total_width, position[1])
 
-        if align == "center":
+        if align == 'center':
             total_width = 0
 
             for text in texts:
@@ -378,6 +378,27 @@ class Editor:
         stroke_width: float = 1,
         radius: int = 0,
     ) -> Editor:
+        """Draw rectangle into image
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw rectangle
+        width: :class:`float`
+            Width of rectangle
+        height: :class:`float`
+            Height of rectangle
+        fill: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`,], optional
+            Fill color, by default None
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Alias of fill, by default ``None``
+        outline: :class:`Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Outline color, by default ``None``
+        stroke_width: :class:`float`, optional
+            Stroke width, by default ``1``
+        radius: :class:`int`, optional
+            Radius of rectangle, by default ``0``
+        """
         return await run_in_executor(self.__rectangle, position, width, height, fill, color, outline, stroke_width, radius)
 
     def __rectangle(
@@ -391,27 +412,6 @@ class Editor:
         stroke_width: float = 1,
         radius: int = 0,
     ) -> Editor:
-        """Draw rectangle into image
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw rectangle
-        width : float
-            Width of rectangle
-        height : float
-            Height of rectangle
-        fill : Union[str, int, Tuple[int, int, int]], optional
-            Fill color, by default None
-        color : Union[str, int, Tuple[int, int, int]], optional
-            Alias of fill, by default None
-        outline : Union[str, int, Tuple[int, int, int]], optional
-            Outline color, by default None
-        stroke_width : float, optional
-            Stroke width, by default 1
-        radius : int, optional
-            Radius of rectangle, by default 0
-        """
         draw = ImageDraw.Draw(self.image)
 
         to_width = width + position[0]
@@ -451,6 +451,29 @@ class Editor:
         stroke_width: float = 1,
         radius: int = 0,
     ) -> Editor:
+        """Draw a progress bar
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw bar
+        max_width: Union[:class:`int`, :class:`float`]
+            Max width of the bar
+        height: Union[:class:`int`, :class:`float`]
+            Height of the bar
+        percentage: :class:`int`, optional
+            Percentage to fill of the bar, by default 1
+        fill: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Fill color, by default ``None``
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Alias of fill, by default ``None``
+        outline: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Outline color, by default ``None``
+        stroke_width: :class:`float`, optional
+            Stroke width, by default ``1``
+        radius: :class:`int`, optional
+            Radius of the bar, by default ``0``
+        """
         return await run_in_executor(self.__bar, position, max_width, height, percentage, fill, color, outline, stroke_width, radius)
 
     def __bar(
@@ -465,29 +488,6 @@ class Editor:
         stroke_width: float = 1,
         radius: int = 0,
     ) -> Editor:
-        """Draw a progress bar
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw bar
-        max_width : Union[int, float]
-            Max width of the bar
-        height : Union[int, float]
-            Height of the bar
-        percentage : int, optional
-            Percentage to fill of the bar, by default 1
-        fill : Union[str, int, Tuple[int, int, int]], optional
-            Fill color, by default None
-        color : Union[str, int, Tuple[int, int, int]], optional
-            Alias of fill, by default None
-        outline : Union[str, int, Tuple[int, int, int]], optional
-            Outline color, by default None
-        stroke_width : float, optional
-            Stroke width, by default 1
-        radius : int, optional
-            Radius of the bar, by default 0
-        """
         draw = ImageDraw.Draw(self.image)
 
         if color:
@@ -527,6 +527,25 @@ class Editor:
         color: Union[str, int, Tuple[int, int, int]] = None,
         stroke_width: float = 1,
     ) -> Editor:
+        """Draw a rounded bar
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw rounded bar
+        width: Union[:class:`int`, :class:`float`]
+            Width of the bar
+        height: Union[:class:`int`, :class:`float`]
+            Height of the bar
+        percentage: :class:`float`
+            Percentage to fill
+        fill: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Fill color, by default ``None``
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Alias of color, by default ``None``
+        stroke_width: :class:`float`, optional
+            Stroke width, by default ``1``
+        """
         return await run_in_executor(self.__rounded_bar, position, width, height, percentage, fill, color, stroke_width)
 
     def __rounded_bar(
@@ -539,25 +558,6 @@ class Editor:
         color: Union[str, int, Tuple[int, int, int]] = None,
         stroke_width: float = 1,
     ) -> Editor:
-        """Draw a rounded bar
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw rounded bar
-        width : Union[int, float]
-            Width of the bar
-        height : Union[int, float]
-            Height of the bar
-        percentage : float
-            Percentage to fill
-        fill : Union[str, int, Tuple[int, int, int]], optional
-            Fill color, by default None
-        color : Union[str, int, Tuple[int, int, int]], optional
-            Alias of color, by default None
-        stroke_width : float, optional
-            Stroke width, by default 1
-        """
         draw = ImageDraw.Draw(self.image)
 
         if color:
@@ -587,6 +587,25 @@ class Editor:
         outline: Union[str, int, Tuple[int, int, int]] = None,
         stroke_width: float = 1,
     ) -> Editor:
+        """Draw an ellipse
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw ellipse
+        width: :class:`float`
+            Width of ellipse
+        height: :class:`float`
+            Height of ellipse
+        fill: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Fill color, by default ``None``
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Alias of fill, by default ``None``
+        outline: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Outline color, by default ``None``
+        stroke_width: :class:`float`, optional
+            Stroke width, by default ``1``
+        """
         return await run_in_executor(self.__ellipse, position, width, height, fill, color, outline, stroke_width)
 
     def __ellipse(
@@ -599,25 +618,6 @@ class Editor:
         outline: Union[str, int, Tuple[int, int, int]] = None,
         stroke_width: float = 1,
     ) -> Editor:
-        """Draw an ellipse
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw ellipse
-        width : float
-            Width of ellipse
-        height : float
-            Height of ellipse
-        fill : Union[str, int, Tuple[int, int, int]], optional
-            Fill color, by default None
-        color : Union[str, int, Tuple[int, int, int]], optional
-            Alias of fill, by default None
-        outline : Union[str, int, Tuple[int, int, int]], optional
-            Outline color, by default None
-        stroke_width : float, optional
-            Stroke width, by default 1
-        """
         draw = ImageDraw.Draw(self.image)
         to_width = width + position[0]
         to_height = height + position[1]
@@ -642,6 +642,19 @@ class Editor:
         color: Union[str, int, Tuple[int, int, int]] = None,
         outline: Union[str, int, Tuple[int, int, int]] = None,
     ) -> Editor:
+        """Draw a polygon
+
+        Parameters
+        ----------
+        coordinates: :class:`list`
+            Coordinates to draw
+        fill: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Fill color, by default ``None``
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Alias of fill, by default ``None``
+        outline: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Outline color, by default ``None``
+        """
         return await run_in_executor(self.__polygon, coordinates, fill, color, outline)
 
     def __polygon(
@@ -651,19 +664,6 @@ class Editor:
         color: Union[str, int, Tuple[int, int, int]] = None,
         outline: Union[str, int, Tuple[int, int, int]] = None,
     ) -> Editor:
-        """Draw a polygon
-
-        Parameters
-        ----------
-        coordinates : list
-            Coordinates to draw
-        fill : Union[str, int, Tuple[int, int, int]], optional
-            Fill color, by default None
-        color : Union[str, int, Tuple[int, int, int]], optional
-            Alias of fill, by default None
-        outline : Union[str, int, Tuple[int, int, int]], optional
-            Outline color, by default None
-        """
         if color:
             fill = color
 
@@ -684,6 +684,27 @@ class Editor:
         color: Union[str, int, Tuple[int, int, int]] = None,
         stroke_width: float = 1,
     ) -> Editor:
+        """Draw arc
+
+        Parameters
+        ----------
+        position: Tuple[:class:`float`, :class:`float`]
+            Position to draw arc
+        width: :class:`float`
+            Width or arc
+        height: :class:`float`
+            Height of arch
+        start: :class:`float`
+            Start position of arch
+        rotation: :class:`float`
+            Rotation in degree
+        fill: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Fill color, by default ``None``
+        color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Alias of fill, by default ``None``
+        stroke_width: :class:`float`, optional
+            Stroke width, by default ``1``
+        """
         return await run_in_executor(self.__arc, position, width, height, start, rotation, fill, color, stroke_width)
 
     def __arc(
@@ -697,27 +718,6 @@ class Editor:
         color: Union[str, int, Tuple[int, int, int]] = None,
         stroke_width: float = 1,
     ) -> Editor:
-        """Draw arc
-
-        Parameters
-        ----------
-        position : Tuple[float, float]
-            Position to draw arc
-        width : float
-            Width or arc
-        height : float
-            Height of arch
-        start : float
-            Start position of arch
-        rotation : float
-            Rotation in degree
-        fill : Union[str, int, Tuple[int, int, int]], optional
-            Fill color, by default None
-        color : Union[str, int, Tuple[int, int, int]], optional
-            Alias of fill, by default None
-        stroke_width : float, optional
-            Stroke width, by default 1
-        """
         draw = ImageDraw.Draw(self.image)
 
         start = start - 90
@@ -738,24 +738,24 @@ class Editor:
 
 
     async def show(self):
+        """Show the image."""
         return await run_in_executor(self.__show)
 
     def __show(self):
-        """Show the image."""
         self.image.show()
 
 
     async def save(self, fp, format: str = None, **params):
-        return await run_in_executor(self.__save, fp, format, **params)
-
-    def __save(self, fp, format: str = None, **params):
         """Save the image
 
         Parameters
         ----------
-        fp : str
+        fp: :class:`str`
             File path
-        format : str, optional
-            File format, by default None
+        format: :class:`str`, optional
+            File format, by default ``None``
         """
+        return await run_in_executor(self.__save, fp, format, **params)
+
+    def __save(self, fp, format: str = None, **params):
         self.image.save(fp, format, **params)

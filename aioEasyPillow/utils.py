@@ -36,7 +36,7 @@ async def run_in_executor(func, *args, **kwargs):
 
     Parameters
     ----------
-    func : func
+    func: func
         Function to run
     """
     func = functools.partial(func, *args, **kwargs)
@@ -49,12 +49,12 @@ async def load_image(link: str) -> Image.Image:
 
     Parameters
     ----------
-    link : str
+    link: :class:`str`
         Image url
 
     Returns
     -------
-    PIL.Image.Image
+    :class:`PIL.Image.Image`
         Image from the provided link (if any)
     """
     async with aiohttp.ClientSession() as session:

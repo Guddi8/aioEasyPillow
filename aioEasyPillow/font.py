@@ -26,29 +26,29 @@ SOFTWARE.
 import os
 
 from PIL import ImageFont
-from typing_extensions import Literal
+from typing import Literal, Optional
 
-fonts_directory = os.path.join(os.path.dirname(__file__), "fonts")
+fonts_directory = os.path.join(os.path.dirname(__file__), 'fonts')
 fonts_path = {
-    "caveat": {
-        "regular": os.path.join(fonts_directory, "caveat", "caveat.ttf"),
-        "bold": os.path.join(fonts_directory, "caveat", "caveat.ttf"),
-        "italic": os.path.join(fonts_directory, "caveat", "caveat.ttf"),
-        "light": os.path.join(fonts_directory, "caveat", "caveat.ttf"),
+    'caveat': {
+        'regular': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
+        'bold': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
+        'italic': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
+        'light': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
     },
-    "montserrat": {
-        "regular": os.path.join(
-            fonts_directory, "montserrat", "montserrat_regular.ttf"
+    'montserrat': {
+        'regular': os.path.join(
+            fonts_directory, 'montserrat', 'montserrat_regular.ttf'
         ),
-        "bold": os.path.join(fonts_directory, "montserrat", "montserrat_bold.ttf"),
-        "italic": os.path.join(fonts_directory, "montserrat", "montserrat_italic.ttf"),
-        "light": os.path.join(fonts_directory, "montserrat", "montserrat_light.ttf"),
+        'bold': os.path.join(fonts_directory, 'montserrat', 'montserrat_bold.ttf'),
+        'italic': os.path.join(fonts_directory, 'montserrat', 'montserrat_italic.ttf'),
+        'light': os.path.join(fonts_directory, 'montserrat', 'montserrat_light.ttf'),
     },
-    "poppins": {
-        "regular": os.path.join(fonts_directory, "poppins", "poppins_regular.ttf"),
-        "bold": os.path.join(fonts_directory, "poppins", "poppins_bold.ttf"),
-        "italic": os.path.join(fonts_directory, "poppins", "poppins_italic.ttf"),
-        "light": os.path.join(fonts_directory, "poppins", "poppins_light.ttf"),
+    'poppins': {
+        'regular': os.path.join(fonts_directory, 'poppins', 'poppins_regular.ttf'),
+        'bold': os.path.join(fonts_directory, 'poppins', 'poppins_bold.ttf'),
+        'italic': os.path.join(fonts_directory, 'poppins', 'poppins_italic.ttf'),
+        'light': os.path.join(fonts_directory, 'poppins', 'poppins_light.ttf'),
     },
 }
 
@@ -58,19 +58,19 @@ class Font:
 
     Parameters
     ----------
-    path : str
+    path: :class:`str`
         Path of font
-    size : int, optional
-        Size of font, by default 10
+    size: :class:`int`, optional
+        Size of font, by default ``10``
     """
 
-    def __init__(self, path: str, size: int = 10, **kwargs) -> None:
+    def __init__(self, path: str, size: Optional[int] = 10, **kwargs) -> None:
         self.font = ImageFont.truetype(path, size=size, **kwargs)
 
     @classmethod
     def poppins(
         cls,
-        variant: Literal["regular", "bold", "italic", "light"] = "regular",
+        variant: Literal['regular', 'bold', 'italic', 'light'] = 'regular',
         size: int = 10,
         **kwargs
     ):
@@ -78,17 +78,17 @@ class Font:
 
         Parameters
         ----------
-        variant : Literal["regular", "bold", "italic", "light"], optional
-            Font variant, by default "regular"
-        size : int, optional
-            Font size, by default 10
+        variant: Literal['regular', 'bold', 'italic', 'light'], optional
+            Font variant, by default ``'regular'``
+        size: :class:`int`, optional
+            Font size, by default ``10``
         """
         return cls(fonts_path["poppins"][variant], size, **kwargs)
 
     @classmethod
     def caveat(
         cls,
-        variant: Literal["regular", "bold", "italic", "light"] = "regular",
+        variant: Literal['regular', 'bold', 'italic', 'light'] = 'regular',
         size: int = 10,
         **kwargs
     ):
@@ -96,17 +96,17 @@ class Font:
 
         Parameters
         ----------
-        variant : Literal["regular", "bold", "italic", "light"], optional
-            Font variant, by default "regular"
-        size : int, optional
-            Font size, by default 10
+        variant: Literal['regular', 'bold', 'italic', 'light'], optional
+            Font variant, by default ``'regular'``
+        size: :class:`int`, optional
+            Font size, by default ``10``
         """
         return cls(fonts_path["caveat"][variant], size, **kwargs)
 
     @classmethod
     def montserrat(
         cls,
-        variant: Literal["regular", "bold", "italic", "light"] = "regular",
+        variant: Literal['regular', 'bold', 'italic', 'light'] = 'regular',
         size: int = 10,
         **kwargs
     ):
@@ -114,9 +114,9 @@ class Font:
 
         Parameters
         ----------
-        variant : Literal["regular", "bold", "italic", "light"], optional
-            Font variant, by default "regular"
-        size : int, optional
-            Font size, by default 10
+        variant: Literal['regular', 'bold', 'italic', 'light'], optional
+            Font variant, by default ``'regular'``
+        size: :class:`int`, optional
+            Font size, by default ``10``
         """
         return cls(fonts_path["montserrat"][variant], size, **kwargs)
