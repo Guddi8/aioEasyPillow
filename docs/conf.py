@@ -36,6 +36,14 @@ extensions = [
     'sphinx.ext.intersphinx',
 ]
 
+# Links used for cross-referencing stuff in other documentation
+intersphinx_mapping = {
+  'py': ('https://docs.python.org/3', None),
+  'aio': ('https://docs.aiohttp.org/en/stable/', None),
+  'req': ('https://requests.readthedocs.io/en/latest/', None),
+  'pil': ('https://pillow.readthedocs.io/en/stable/', None)
+}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
