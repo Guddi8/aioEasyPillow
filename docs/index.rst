@@ -8,9 +8,11 @@ Welcome to aioEasyPillow's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Table of Contents
 
-   pages/intro
+   intro
+   discord
+   api
 
 ..
    Indices and tables
@@ -43,5 +45,4 @@ Quickstart
    asyncio.run(main())
 
 
-Komisch Komisch
-
+Scheint ja doch zu gehen
