@@ -15,25 +15,14 @@ Welcome to aioEasyPillow's documentation!
    discord
    api
 
+Getting Started
+---------------
+Using this for the first time? Here are some links to help you get started.
 
-Quickstart
-==========
+- First steps :doc:`/intro`
+- In a discord bot :doc:`/discord`
+- Searching for something :ref:`search` and :ref:`genindex`
 
-.. code-block:: python
-   :caption: A quick example how to create a image an add some text
-
-   import asyncio
-
-   from aioEasyPillow import Editor, Canvas, Font
-
-   async def main():
-       blank = Canvas((200, 100), 'black')
-       editor = Editor(blank)
-       font = Font.poppins('bold', 200)
-
-       await editor.text((20,20), 'Quick Example', font)
-       await editor.save('example.png', 'PNG')
-       await editor.show()
-
-   asyncio.run(main())
-
+Get help
+--------
+- DM me on `Discord <https://discord.com>`_ (``Guddi#9552``)

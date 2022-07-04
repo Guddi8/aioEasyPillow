@@ -3,6 +3,4 @@
 Utils
 =====
 
-.. automodule:: utils
-    :members:
-    :undoc-members:
+.. autofunction:: load_image
