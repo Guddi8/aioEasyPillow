@@ -38,7 +38,7 @@ class Canvas:
     width: :class:`float`, optional
         Width of image, by default ``None``
     height: :class:`float`, optional
-        Height of image, by default None
+        Height of image, by default ``None``
     color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
         Color of image, by default ``None``
 
