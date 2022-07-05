@@ -21,7 +21,7 @@ Using this for the first time? Here are some links to help you get started.
 
 - First steps :doc:`/intro`
 - In a discord bot :doc:`/discord`
-- Searching for something :ref:`search` and :ref:`genindex`
+- Check out the :doc:`/api`
 
 Get help
 --------

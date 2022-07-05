@@ -227,7 +227,7 @@ class Editor:
 
 
     async def paste(
-        self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
+            self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float] = (0,0)
     ) -> Editor:
         """Paste image into editor
 
@@ -236,12 +236,12 @@ class Editor:
         image: Union[:class:`Image.Image`, :class:`Editor`, :class:`Canvas`]
             Image to paste
         position: Tuple[:class:`float`, :class:`float`]
-            Position to paste
+            Position to paste, default is ``(0,0)``
         """
         return await run_in_executor(self.__paste, image, position)
 
     def __paste(
-        self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float]
+            self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float] = (0,0)
     ) -> Editor:
         blank = Image.new('RGBA', size=self.image.size, color=(255, 255, 255, 0))
 
