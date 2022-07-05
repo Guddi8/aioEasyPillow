@@ -227,7 +227,10 @@ class Editor:
 
 
     async def paste(
-            self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float] = (0,0)
+            self,
+            image: Union[Image.Image, Editor, Canvas],
+            position: Tuple[float, float] = (0,0),
+            mask: Union[Image.Image, Editor] = None
     ) -> Editor:
         """Paste image into editor
 
@@ -237,18 +240,26 @@ class Editor:
             Image to paste
         position: Tuple[:class:`float`, :class:`float`]
             Position to paste, default is ``(0,0)``
+        mask: Union[:class:`Image.Image`, :class:`Editor`]
+            An optional mask image, by default ``None``
         """
-        return await run_in_executor(self.__paste, image, position)
+        return await run_in_executor(self.__paste, image, position, mask)
 
     def __paste(
-            self, image: Union[Image.Image, Editor, Canvas], position: Tuple[float, float] = (0,0)
+            self,
+            image: Union[Image.Image, Editor, Canvas],
+            position: Tuple[float, float] = (0,0),
+            mask: Union[Image.Image, Editor] = None
     ) -> Editor:
         blank = Image.new('RGBA', size=self.image.size, color=(255, 255, 255, 0))
 
         if isinstance(image, Editor) or isinstance(image, Canvas):
             image = image.image
 
-        blank.paste(image, position)
+        if mask and isinstance(mask, Editor):
+            mask = mask.image
+
+        blank.paste(image, position, mask)
         self.image = Image.alpha_composite(self.image, blank)
 
         return self
