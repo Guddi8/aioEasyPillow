@@ -14,6 +14,7 @@ Welcome to aioEasyPillow's documentation!
    intro
    discord
    api
+   whats_new
 
 Getting Started
 ---------------
@@ -23,6 +24,9 @@ Using this for the first time? Here are some links to help you get started.
 - In a discord bot :doc:`/discord`
 - Check out the :doc:`/api`
 
-Get help
---------
-- DM me on `Discord <https://discord.com>`_ (``Guddi#9552``)
+Meta
+----
+- Questions? Ideas? Bugs? Need help?
+   - DM me on `Discord <https://discord.gg/gaRuXAfSqg>`_ (``Guddi#9552``)
+   - or feel free post it on `Github <https://github.com/Guddi8/aioEasyPillow/issues>`_
+- Check out the :doc:`whats_new`
