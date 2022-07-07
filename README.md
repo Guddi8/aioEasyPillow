@@ -16,10 +16,10 @@ A python library based on [easy-pil] and [Pillow] to easily edit/modify images.
 To install the library directly from PyPI you can just run the following command:
 ```shell
 # Linux/macOS
-python3 -m pip install -U "discord.py[voice]"
+python3 -m pip install -U aioEasyPillow
 
 # Windows
-py -3 -m pip install -U discord.py[voice]
+py -3 -m pip install -U aioEasyPillow
 ```
 
 
