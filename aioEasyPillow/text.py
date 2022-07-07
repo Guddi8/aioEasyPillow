@@ -38,15 +38,23 @@ class Text:
     font: :class:`ImageFont.FreeTypeFont`
         Font for the text
     color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
-        Font color, by default ``"black"``
+        Font color, by default ``'black'``
+    stroke_width: :class:`int`, optional
+        The optional width of the text stroke, by default ``0``
+    stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+        Color to use for the text stroke. Default to the `color` parameter.
     """
 
     def __init__(
         self,
         text: str,
         font: ImageFont.FreeTypeFont,
-        color: Union[Tuple[int, int, int], str, int] = "black",
+        color: Union[Tuple[int, int, int], str, int] = 'black',
+        stroke_width: int = 0,
+        stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> None:
         self.text = text
         self.font = font
         self.color = color
+        self.stroke_width = stroke_width
+        self.stroke_color = stroke_color or self.color

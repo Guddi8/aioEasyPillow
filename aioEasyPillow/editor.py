@@ -342,10 +342,11 @@ class Editor:
         align: Literal['left', 'center', 'right'], optional
             Align texts, by default ``'left'``
         stroke_width: :class:`int`, optional
-            The optional width of the text stroke, by default ``0``
+            The optional width of the text stroke, by default ``0``.
+            Use this as a default if not all of your :class:`Text` classes have a `stroke_width` defined.
         stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
             Color to use for the text stroke. Default to the `color` parameter.
-
+            Use this as a default if not all of your :class:`Text` classes have a `stroke_color` defined.
         """
         return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align, stroke_width, stroke_color)
 
@@ -383,10 +384,12 @@ class Editor:
             sentence = text.text
             font = text.font
             color = text.color
+            stroke_width = text.stroke_width or stroke_width  # if the text has a specific stroke width or color set,
+            stroke_color = text.stroke_color or stroke_color  # use it, otherwise use the one from the function params
 
             if space_separated:
                 width, _ = (
-                    font.getsize(sentence)[0] + font.getsize(" ")[0],
+                    font.getsize(sentence)[0] + font.getsize(' ')[0],
                     font.getsize(sentence)[1],
                 )
             else:
