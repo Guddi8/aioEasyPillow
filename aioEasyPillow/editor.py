@@ -292,7 +292,7 @@ class Editor:
         stroke_width: :class:`int`, optional
             The optional width of the text stroke, by default ``0``
         stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
-            Color to use for the text stroke. Default to the `color` parameter.
+            Color to use for the text stroke. Default to the ``color`` parameter.
         """
         return await run_in_executor(self.__text, position, text, font, color, align, stroke_width, stroke_color)
 
@@ -343,11 +343,11 @@ class Editor:
             Align texts, by default ``'left'``
         stroke_width: :class:`int`, optional
             The optional width of the text stroke, by default ``0``.
-            Use this as a default if not all of your :class:`Text` classes have a `stroke_width` defined.
+            Use this as a default if not all of your :class:`Text` classes have a ``stroke_width`` defined.
         stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
             Color to use for the text stroke.
-            Use this as a default if not all of your :class:`Text` classes have a `stroke_color` defined.
-            If there is no `stroke_with` set in this function nor in the :class:`Text` class its default is the `color` from the :class:`Text`
+            Use this as a default if not all of your :class:`Text` classes have a ``stroke_color`` defined.
+            If there is no ``stroke_with`` set in this function nor in the :class:`Text` class its default is the ``color`` from the :class:`Text`
         """
         return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align, stroke_width, stroke_color)
 
