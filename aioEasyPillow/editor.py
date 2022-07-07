@@ -345,8 +345,9 @@ class Editor:
             The optional width of the text stroke, by default ``0``.
             Use this as a default if not all of your :class:`Text` classes have a `stroke_width` defined.
         stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
-            Color to use for the text stroke. Default to the `color` parameter.
+            Color to use for the text stroke.
             Use this as a default if not all of your :class:`Text` classes have a `stroke_color` defined.
+            If there is no `stroke_with` set in this function nor in the :class:`Text` class its default is the `color` from the :class:`Text`
         """
         return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align, stroke_width, stroke_color)
 
@@ -381,23 +382,23 @@ class Editor:
             position = (position[0] - (total_width / 2), position[1])
 
         for text in texts:
-            sentence = text.text
-            font = text.font
-            color = text.color
-            stroke_width = text.stroke_width or stroke_width  # if the text has a specific stroke width or color set,
-            stroke_color = text.stroke_color or stroke_color  # use it, otherwise use the one from the function params
+            _sentence = text.text
+            _font = text.font
+            _color = text.color
+            _stroke_width = text.stroke_width if text.stroke_width is not None else stroke_width
+            _stroke_color = text.stroke_color or stroke_color or text.color
 
             if space_separated:
                 width, _ = (
-                    font.getsize(sentence)[0] + font.getsize(' ')[0],
-                    font.getsize(sentence)[1],
+                    _font.getsize(_sentence)[0] + _font.getsize(' ')[0],
+                    _font.getsize(_sentence)[1],
                 )
             else:
-                width, _ = font.getsize(sentence)
+                width, _ = _font.getsize(_sentence)
 
             draw.text(
-                position, sentence, color, font,
-                stroke_width=stroke_width, stroke_fill=stroke_color
+                position, _sentence, _color, _font,
+                stroke_width=_stroke_width, stroke_fill=_stroke_color
             )
             position = (position[0] + width, position[1])
 
