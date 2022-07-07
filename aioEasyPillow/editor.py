@@ -272,6 +272,8 @@ class Editor:
         font: Union[ImageFont.FreeTypeFont, Font] = None,
         color: Union[Tuple[int, int, int], str, int] = 'black',
         align: Literal["left", "center", "right"] = 'left',
+        stroke_width: int = 0,
+        stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> Editor:
         """Draw text into image
 
@@ -287,8 +289,12 @@ class Editor:
             Color of the font, by default ``'black'``
         align: Literal['left', 'center', 'right'], optional
             Align text, by default ``'left'``
+        stroke_width: :class:`int`, optional
+            The optional width of the text stroke, by default ``0``
+        stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Color to use for the text stroke. Default to the `color` parameter.
         """
-        return await run_in_executor(self.__text, position, text, font, color, align)
+        return await run_in_executor(self.__text, position, text, font, color, align, stroke_width, stroke_color)
 
     def __text(
         self,
@@ -297,6 +303,8 @@ class Editor:
         font: Union[ImageFont.FreeTypeFont, Font] = None,
         color: Union[Tuple[int, int, int], str, int] = 'black',
         align: Literal["left", "center", "right"] = 'left',
+        stroke_width: int = 0,
+        stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> Editor:
         if isinstance(font, Font):
             font = font.font
@@ -304,8 +312,11 @@ class Editor:
         anchors = {'left': 'lt', 'center': 'mt', 'right': 'rt'}
 
         draw = ImageDraw.Draw(self.image)
-        draw.text(position, text, color, font=font, anchor=anchors[align])
-
+        draw.text(
+            position, text, color,
+            font=font, anchor=anchors[align],
+            stroke_width=stroke_width, stroke_fill=stroke_color
+        )
         return self
 
 
@@ -315,6 +326,8 @@ class Editor:
         texts: List[Text],
         space_separated: bool = True,
         align: Literal["left", "center", "right"] = "left",
+        stroke_width: int = 0,
+        stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> Editor:
         """Draw multicolor text
 
@@ -328,8 +341,13 @@ class Editor:
             Separate texts with space, by default ``True``
         align: Literal['left', 'center', 'right'], optional
             Align texts, by default ``'left'``
+        stroke_width: :class:`int`, optional
+            The optional width of the text stroke, by default ``0``
+        stroke_color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
+            Color to use for the text stroke. Default to the `color` parameter.
+
         """
-        return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align)
+        return await run_in_executor(self.__multicolor_text, position, texts, space_separated, align, stroke_width, stroke_color)
 
     def __multicolor_text(
         self,
@@ -337,6 +355,8 @@ class Editor:
         texts: List[Text],
         space_separated: bool = True,
         align: Literal["left", "center", "right"] = 'left',
+        stroke_width: int = 0,
+        stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> Editor:
         draw = ImageDraw.Draw(self.image)
 
@@ -372,7 +392,10 @@ class Editor:
             else:
                 width, _ = font.getsize(sentence)
 
-            draw.text(position, sentence, color, font=font)
+            draw.text(
+                position, sentence, color, font,
+                stroke_width=stroke_width, stroke_fill=stroke_color
+            )
             position = (position[0] + width, position[1])
 
         return self
