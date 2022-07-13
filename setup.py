@@ -23,6 +23,9 @@ setup(
     long_description_content_type="text/markdown",
     author='Guddi',
     url='https://github.com/Guddi8/aioEasyPillow',
+    project_urls={
+        "Documentation": "https://aioeasypillow.readthedocs.io/en/latest/",
+    },
     packages=find_packages(),
     license='MIT',
     keywords=[
