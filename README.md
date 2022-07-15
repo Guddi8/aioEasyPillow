@@ -9,6 +9,7 @@
 [documentation]: https://aioeasypillow.readthedocs.io/en/latest/
 
 A python library based on [easy-pil] and [Pillow] to easily edit/modify images.
+
 Read more details about this libary in the official [documentation].
 
 
