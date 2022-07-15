@@ -46,10 +46,10 @@ async def create_rank_card():
     )
 
     rank_level_texts = [
-        Text('Rank ', color='#00fa81', font=font_big.font),
-        Text(f'{user_data["rank"]}', color='#1EAAFF', font=font_big.font),
-        Text('   Level ', color='#00fa81', font=font_big.font),
-        Text(f'{user_data["level"]}', color='#1EAAFF', font=font_big.font),
+        Text('Rank ', color='#00fa81', font=font_big),
+        Text(f'{user_data["rank"]}', color='#1EAAFF', font=font_big),
+        Text('   Level ', color='#00fa81', font=font_big),
+        Text(f'{user_data["level"]}', color='#1EAAFF', font=font_big),
     ]
     await background.multicolor_text((820, 30), texts=rank_level_texts, align='right')
 
