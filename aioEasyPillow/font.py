@@ -31,15 +31,13 @@ from typing import Literal, Optional
 fonts_directory = os.path.join(os.path.dirname(__file__), 'fonts')
 fonts_path = {
     'caveat': {
-        'regular': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
-        'bold': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
-        'italic': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
-        'light': os.path.join(fonts_directory, 'caveat', 'caveat.ttf'),
+        'regular': os.path.join(fonts_directory, 'caveat', 'caveat_regular.ttf'),
+        'bold': os.path.join(fonts_directory, 'caveat', 'caveat_bold.ttf'),
+        'italic': os.path.join(fonts_directory, 'caveat', 'caveat_regular.ttf'),
+        'light': os.path.join(fonts_directory, 'caveat', 'caveat_light.ttf'),
     },
     'montserrat': {
-        'regular': os.path.join(
-            fonts_directory, 'montserrat', 'montserrat_regular.ttf'
-        ),
+        'regular': os.path.join(fonts_directory, 'montserrat', 'montserrat_regular.ttf'),
         'bold': os.path.join(fonts_directory, 'montserrat', 'montserrat_bold.ttf'),
         'italic': os.path.join(fonts_directory, 'montserrat', 'montserrat_italic.ttf'),
         'light': os.path.join(fonts_directory, 'montserrat', 'montserrat_light.ttf'),
@@ -83,7 +81,7 @@ class Font:
         size: :class:`int`, optional
             Font size, by default ``10``
         """
-        return cls(fonts_path["poppins"][variant], size, **kwargs)
+        return cls(fonts_path['poppins'][variant], size, **kwargs)
 
     @classmethod
     def caveat(
@@ -101,7 +99,7 @@ class Font:
         size: :class:`int`, optional
             Font size, by default ``10``
         """
-        return cls(fonts_path["caveat"][variant], size, **kwargs)
+        return cls(fonts_path['caveat'][variant], size, **kwargs)
 
     @classmethod
     def montserrat(
@@ -119,4 +117,4 @@ class Font:
         size: :class:`int`, optional
             Font size, by default ``10``
         """
-        return cls(fonts_path["montserrat"][variant], size, **kwargs)
+        return cls(fonts_path['montserrat'][variant], size, **kwargs)
