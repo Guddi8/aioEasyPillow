@@ -27,6 +27,8 @@ from typing import Tuple, Union
 
 from PIL import ImageFont
 
+from .font import Font
+
 
 class Text:
     """Text class
@@ -35,7 +37,7 @@ class Text:
     ----------
     text: :class:`str`
         Text to write
-    font: :class:`ImageFont.FreeTypeFont`
+    font: Union[:class:`Font`, :class:`ImageFont.FreeTypeFont`]
         Font for the text
     color: Union[Tuple[:class:`int`, :class:`int`, :class:`int`], :class:`str`, :class:`int`], optional
         Font color, by default ``'black'``
@@ -48,13 +50,13 @@ class Text:
     def __init__(
         self,
         text: str,
-        font: ImageFont.FreeTypeFont,
+        font: Union[Font, ImageFont.FreeTypeFont],
         color: Union[Tuple[int, int, int], str, int] = 'black',
         stroke_width: int = None,
         stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> None:
         self.text = text
-        self.font = font
+        self.font = font.font if isinstance(font, Font) else font
         self.color = color
         self.stroke_width = stroke_width
         self.stroke_color = stroke_color
