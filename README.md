@@ -6,8 +6,11 @@
 
 [Pillow]: https://github.com/python-pillow/Pillow
 [easy-pil]: https://github.com/shahriyardx/easy-pil
+[documentation]: https://aioeasypillow.readthedocs.io/en/latest/
 
 A python library based on [easy-pil] and [Pillow] to easily edit/modify images.
+
+Read more details about this libary in the official [documentation].
 
 
 ## Installation
