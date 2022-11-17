@@ -361,8 +361,6 @@ class Editor:
         stroke_width: int = 0,
         stroke_color: Union[Tuple[int, int, int], str, int] = None,
     ) -> Editor:
-        draw = ImageDraw.Draw(self.image)
-
         if align == 'left':
             position = position
 
@@ -397,9 +395,9 @@ class Editor:
             else:
                 width, _ = _font.getsize(_sentence)
 
-            draw.text(
-                position, _sentence, _color, _font,
-                stroke_width=_stroke_width, stroke_fill=_stroke_color
+            self.__text(
+                position, _sentence, _font, _color,
+                stroke_width=_stroke_width, stroke_color=_stroke_color
             )
             position = (position[0] + width, position[1])
 
